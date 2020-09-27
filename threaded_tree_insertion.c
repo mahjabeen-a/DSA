@@ -19,28 +19,31 @@ struct node* insertNode(struct node* root, int val) {
 	if (root == NULL) 
 	    return newNode(val); 
 	    
-	struct node* temp = (struct node*)malloc(sizeof(struct node));  
-	struct node* newNode = (struct node*)malloc(sizeof(struct node));
+	struct node* temp; 
+	struct node* Node = (struct node*)malloc(sizeof(struct node));
 	
 	if (val < root->data) {
-		newNode = insertNode(root->left, val); 
-		root->left = newNode;
-		newNode->right = root;
-		newNode->thread = 1;
+		Node = insertNode(root->left, val); 
+		root->left = Node;
+		if(Node->right == NULL){
+		    Node->right = root;
+		    Node->thread = 1;
+		}
 	}
 		
 	else {
-		newNode = insertNode(root->right, val);
 		if (root->thread != 1){
+		    Node = insertNode(root->right, val);
 		    if (root->right == NULL){
-		        root->right = newNode;
+		        root->right = Node;
 		    }
 		}
 		else {
+		   Node = insertNode(NULL, val);
 		   temp = root->right;
-		   root->right = newNode;
-		   newNode->right = temp;
-		   newNode->thread = 1;
+		   root->right = Node;
+		   Node->right = temp;
+		   Node->thread = 1;
 		   root->thread = 0;
 		}
 	
