@@ -11,10 +11,12 @@ void heapify(int i, int n, int a[]){
     int maxi = i;
     int left = 2*i + 1;
     int right = 2*i + 2;
-    if ((left < n) && (right < n)) {
-        maxi = (a[left] > a[right]) ? left : right;
-        maxi = (a[maxi] > a[i]) ? maxi : i;
-    }
+    if (left < n && a[left] > a[maxi]) 
+        maxi = left; 
+
+    if (right < n && a[right] > a[maxi]) 
+        maxi = right;
+    
     if (maxi != i){
         swap(&a[i], &a[maxi]);
         heapify(maxi, n, a);
