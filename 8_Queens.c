@@ -8,10 +8,10 @@ bool isSafe(int board[N][N], int row, int col){
         if (board[row][c] == 1) return false;
     }
     int i,j;
-    for (i = row, j = col; i < N, j >= 0; i++, j--){
+    for (i = row, j = col; i < N && j >= 0; i++, j--){
         if (board[i][j] == 1) return false;
     }
-    for (i = row, j = col; i >= 0, j >= 0; i--, j--){
+    for (i = row, j = col; i >= 0 && j >= 0; i--, j--){
         if (board[i][j] == 1) return false;
     }
     return true;
